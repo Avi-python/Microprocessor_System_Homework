@@ -3,4 +3,4 @@
 ### 如何跑以上專案 ?
 
 1. Copy the code and past to Keil uVision5 
-2. Run
+2. Complie and Run
