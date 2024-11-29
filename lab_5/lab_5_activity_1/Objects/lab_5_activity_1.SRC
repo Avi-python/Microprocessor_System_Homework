@@ -1,0 +1,243 @@
+; .\Objects\lab_5_activity_1.SRC generated from: lab_5_activity_1.c
+; COMPILER INVOKED BY:
+;        C:\Keil_v5\C51\BIN\C51.EXE lab_5_activity_1.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\lab_5_activity_1.lst) TABS(2) SRC(.\Objects\lab_5_activity_1.SRC)
+
+$NOMOD51
+
+NAME	LAB_5_ACTIVITY_1
+
+P0	DATA	080H
+P1	DATA	090H
+P2	DATA	0A0H
+P3	DATA	0B0H
+T0	BIT	0B0H.4
+AC	BIT	0D0H.6
+T1	BIT	0B0H.5
+EA	BIT	0A8H.7
+IE	DATA	0A8H
+RD	BIT	0B0H.7
+ES	BIT	0A8H.4
+IP	DATA	0B8H
+RI	BIT	098H.0
+INT0	BIT	0B0H.2
+CY	BIT	0D0H.7
+TI	BIT	098H.1
+INT1	BIT	0B0H.3
+PS	BIT	0B8H.4
+SP	DATA	081H
+OV	BIT	0D0H.2
+WR	BIT	0B0H.6
+SBUF	DATA	099H
+PCON	DATA	087H
+SCON	DATA	098H
+TMOD	DATA	089H
+TCON	DATA	088H
+IE0	BIT	088H.1
+IE1	BIT	088H.3
+B	DATA	0F0H
+ACC	DATA	0E0H
+ET0	BIT	0A8H.1
+ET1	BIT	0A8H.3
+TF0	BIT	088H.5
+TF1	BIT	088H.7
+RB8	BIT	098H.2
+TH0	DATA	08CH
+EX0	BIT	0A8H.0
+IT0	BIT	088H.0
+TH1	DATA	08DH
+TB8	BIT	098H.3
+EX1	BIT	0A8H.2
+IT1	BIT	088H.2
+P	BIT	0D0H.0
+SM0	BIT	098H.7
+TL0	DATA	08AH
+SM1	BIT	098H.6
+TL1	DATA	08BH
+SM2	BIT	098H.5
+PT0	BIT	0B8H.1
+PT1	BIT	0B8H.3
+RS0	BIT	0D0H.3
+TR0	BIT	088H.4
+RS1	BIT	0D0H.4
+TR1	BIT	088H.6
+PX0	BIT	0B8H.0
+PX1	BIT	0B8H.2
+DPH	DATA	083H
+DPL	DATA	082H
+REN	BIT	098H.4
+RXD	BIT	0B0H.0
+TXD	BIT	0B0H.1
+F0	BIT	0D0H.5
+PSW	DATA	0D0H
+?PR?main?LAB_5_ACTIVITY_1                SEGMENT CODE 
+?DT?main?LAB_5_ACTIVITY_1                SEGMENT DATA OVERLAYABLE 
+?PR?_displayAsciiN?LAB_5_ACTIVITY_1      SEGMENT CODE 
+?PR?_numToAscii?LAB_5_ACTIVITY_1         SEGMENT CODE 
+?PR?displayNone?LAB_5_ACTIVITY_1         SEGMENT CODE 
+?PR?_MSDelay?LAB_5_ACTIVITY_1            SEGMENT CODE 
+	EXTRN	CODE (_listen)
+	EXTRN	CODE (?C_STARTUP)
+	PUBLIC	_MSDelay
+	PUBLIC	displayNone
+	PUBLIC	_numToAscii
+	PUBLIC	_displayAsciiN
+	PUBLIC	main
+
+	RSEG  ?DT?main?LAB_5_ACTIVITY_1
+?main?BYTE:
+          x?040:   DS   1
+; #include <reg51.h>
+; 
+; // 411085025
+; // group 4
+; 
+; #define INPUT P2
+; #define OUTPUT P1
+; 
+; extern unsigned char _listen(void);
+; void displayAsciiN(unsigned char);
+; void displayNone();
+; unsigned char numToAscii(unsigned char);
+; void MSDelay(unsigned int);
+; 
+; void main(void)
+
+	RSEG  ?PR?main?LAB_5_ACTIVITY_1
+main:
+	USING	0
+			; SOURCE LINE # 15
+; {
+			; SOURCE LINE # 16
+; 	INPUT = 0xFF;
+			; SOURCE LINE # 17
+	MOV  	P2,#0FFH
+; 	for(;;)
+			; SOURCE LINE # 18
+?C0001:
+; 	{
+			; SOURCE LINE # 19
+; 		unsigned char x;
+; 		x = _listen();
+			; SOURCE LINE # 21
+	LCALL	_listen
+	MOV  	x?040,R7
+; 		displayAsciiN(x);
+			; SOURCE LINE # 22
+	LCALL	_displayAsciiN
+; 	}
+			; SOURCE LINE # 23
+	SJMP 	?C0001
+; END OF main
+
+; }
+; 
+; void displayAsciiN(unsigned char target)
+
+	RSEG  ?PR?_displayAsciiN?LAB_5_ACTIVITY_1
+_displayAsciiN:
+	USING	0
+			; SOURCE LINE # 26
+;---- Variable 'target?141' assigned to Register 'R7' ----
+; {
+			; SOURCE LINE # 27
+; 	OUTPUT = ~numToAscii(target);
+			; SOURCE LINE # 28
+	LCALL	_numToAscii
+	MOV  	A,R7
+	CPL  	A
+	MOV  	P1,A
+; 	MSDelay(1000);
+			; SOURCE LINE # 29
+	MOV  	R7,#0E8H
+	MOV  	R6,#03H
+	LJMP 	_MSDelay
+; END OF _displayAsciiN
+
+; }
+; 
+; unsigned char numToAscii(unsigned char target)
+
+	RSEG  ?PR?_numToAscii?LAB_5_ACTIVITY_1
+_numToAscii:
+	USING	0
+			; SOURCE LINE # 32
+;---- Variable 'target?242' assigned to Register 'R7' ----
+; {
+			; SOURCE LINE # 33
+; 	return 0x30 | target;
+			; SOURCE LINE # 34
+	MOV  	A,R7
+	ORL  	A,#030H
+	MOV  	R7,A
+; }
+			; SOURCE LINE # 35
+	RET  	
+; END OF _numToAscii
+
+; 
+; void displayNone()
+
+	RSEG  ?PR?displayNone?LAB_5_ACTIVITY_1
+displayNone:
+			; SOURCE LINE # 37
+; {
+			; SOURCE LINE # 38
+; 	OUTPUT = 0xFF;
+			; SOURCE LINE # 39
+	MOV  	P1,#0FFH
+; }
+			; SOURCE LINE # 40
+	RET  	
+; END OF displayNone
+
+; 
+; void MSDelay(unsigned int itime)
+
+	RSEG  ?PR?_MSDelay?LAB_5_ACTIVITY_1
+_MSDelay:
+	USING	0
+			; SOURCE LINE # 42
+;---- Variable 'itime?443' assigned to Register 'R6/R7' ----
+; {
+			; SOURCE LINE # 43
+; 	unsigned int i, j;
+; 	for(i=0;i<itime;i++)
+			; SOURCE LINE # 45
+;---- Variable 'i?444' assigned to Register 'R4/R5' ----
+	CLR  	A
+	MOV  	R5,A
+	MOV  	R4,A
+?C0007:
+	CLR  	C
+	MOV  	A,R5
+	SUBB 	A,R7
+	MOV  	A,R4
+	SUBB 	A,R6
+	JNC  	?C0013
+; 	for(j=0;j<113;j++);
+			; SOURCE LINE # 46
+;---- Variable 'j?445' assigned to Register 'R2/R3' ----
+	CLR  	A
+	MOV  	R3,A
+	MOV  	R2,A
+?C0010:
+	INC  	R3
+	CJNE 	R3,#00H,?C0014
+	INC  	R2
+?C0014:
+	MOV  	A,R3
+	XRL  	A,#071H
+	ORL  	A,R2
+	JNZ  	?C0010
+?C0009:
+	INC  	R5
+	CJNE 	R5,#00H,?C0015
+	INC  	R4
+?C0015:
+	SJMP 	?C0007
+; }			; SOURCE LINE # 47
+?C0013:
+	RET  	
+; END OF _MSDelay
+
+	END

@@ -1,0 +1,13 @@
+
+NAME	LISTEN_INPUT
+
+?PR?listenINPUT?LISTEN_INPUT SEGMENT CODE
+	RSEG ?PR?listenINPUT?LISTEN_INPUT
+	
+	PUBLIC listenINPUT
+	
+	org 0
+listenInput:
+	MOV R7, 8
+    RET
+	end
