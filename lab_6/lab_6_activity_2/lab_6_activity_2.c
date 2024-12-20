@@ -8,7 +8,7 @@
 
 #define DO  262
 #define RE  294
-#define MI  330 
+#define MI  330
 #define FA  349  
 #define SO  392    
 #define LA  440
